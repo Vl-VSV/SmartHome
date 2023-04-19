@@ -6,17 +6,18 @@ from pydantic import Field
 from pydantic.main import BaseModel
 
 app = FastAPI(
-    title="Trading app"
+    title="Smart Home"
 )
 
-
 ledState = 1
+
 
 @app.get('/getLedState', response_model=int)
 def get_led_state():
     return ledState
 
+
 @app.post('/setLedState/{state}')
 def set_led_state(state: int):
     ledState = state
-    return {'status': 200, 'newLedState' : ledState}
+    return {'status': 200, 'newLedState': ledState}
