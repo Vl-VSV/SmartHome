@@ -17,7 +17,7 @@ def get_led_state():
     return ledState
 
 
-@app.post('/setLedState')
+@app.get('/setLedState')
 def set_led_state(state: int = 0):
     global ledState
     ledState = state
