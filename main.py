@@ -9,7 +9,7 @@ app = FastAPI(
     title="Smart Home"
 )
 
-ledState = 1
+ledState = 0
 
 
 @app.get('/getLedState', response_model=int)
@@ -17,7 +17,8 @@ def get_led_state():
     return ledState
 
 
-@app.post('/setLedState/{state}')
-def set_led_state(state: int):
+@app.post('/setLedState')
+def set_led_state(state: int = 0):
+    global ledState
     ledState = state
     return {'status': 200, 'newLedState': ledState}
