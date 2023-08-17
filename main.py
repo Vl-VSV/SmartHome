@@ -11,7 +11,16 @@ class Data(BaseModel):
     ledR: int = Field(ge=0, le=255, default=0)
     ledG: int = Field(ge=0, le=255, default=0)
     ledB: int = Field(ge=0, le=255, default=0)
-    mtrx: List[str] = ["0b11111111" * 8]
+    temperature: int = 0
+    mtrx: List[str] = ["0b11111111",
+                       "0b11111111",
+                       "0b11111111",
+                       "0b11111111",
+                       "0b11111111",
+                       "0b11111111",
+                       "0b11111111",
+                       "0b11111111"
+                       ]
 
 
 data = Data()
@@ -46,4 +55,11 @@ def get_data():
 def set_matrix(mtrx_states: List[str]):
     global data
     data.mtrx = mtrx_states
+    return data
+
+
+@app.post('/setTemperature', response_model=Data)
+def set_temperature(temperature: int):
+    global data
+    data.temperature = temperature
     return data
